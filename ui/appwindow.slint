@@ -1,4 +1,3 @@
-import { Button, VerticalBox, Palette, Switch } from "std-widgets.slint";
 import { PCPage, GamesPage, AccountPage, SessionsPage, SettingsPage } from "ui/pages/pages.slint";
 import { SideBar } from "ui/side_bar.slint";
 
@@ -11,10 +10,14 @@ export component AppWindow inherits Window {
                 model: [@tr("Menu" => "PC"), @tr("Menu" => "Games"), @tr("Menu" => "Account"), @tr("Menu" => "Sessions"), @tr("Menu" => "Settings")];
             }
 
-            if(side-bar.current-item == 0) : PCPage {}
-            if(side-bar.current-item == 1) : GamesPage {}
-            if(side-bar.current-item == 2) : AccountPage {}
-            if(side-bar.current-item == 3) : SessionsPage {}
-            if(side-bar.current-item == 4) : SettingsPage {}
+            HorizontalLayout {
+                alignment: center;
+                if(side-bar.current-item == 0) : PCPage {}
+                if(side-bar.current-item == 1) : GamesPage {}
+                if(side-bar.current-item == 2) : AccountPage {}
+                if(side-bar.current-item == 3) : SessionsPage {}
+                if(side-bar.current-item == 4) : SettingsPage {}
+            }
+
      }
 }
