@@ -1,3 +1,4 @@
+use slint_build::compile;
 fn main() {
-    slint_build::compile("ui/appwindow.slint").unwrap();
+    compile("ui/appwindow.slint").unwrap();
 }

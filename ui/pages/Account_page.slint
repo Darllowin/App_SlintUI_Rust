@@ -1,3 +1,115 @@
-export component AccountPage inherits Window {
+import { LineEdit, Button, VerticalBox } from "std-widgets.slint";
 
+export component AccountPage inherits Window {
+    property <bool> log_component_enabled: true;
+    property <bool> reg_component_enabled: false;
+    property <bool> visible_log_in: true;
+    property <bool> visible_reg_in: false;
+    Window {
+        visible: visible_log_in;
+        property<string> username;
+        property<string> password;
+        callback login_requested(string, string);
+        width: 300px;
+        height: 500px;
+        VerticalLayout {
+            alignment: center;
+            Text {
+                font-size: 20pt;
+                horizontal-alignment: center;
+                text: "Авторизация";
+            }
+            VerticalBox {
+                alignment: center;
+                height: 230px;
+                LineEdit {
+                    enabled: log_component_enabled;
+                    placeholder-text: "Почта";
+
+                }
+                LineEdit {
+                    enabled: log_component_enabled;
+                    placeholder-text: "Пароль";
+
+                }
+                Button {
+                    enabled: log_component_enabled;
+                    text: "Войти";
+                    clicked => { login_requested(username, password); }
+
+                }
+            }
+        }
+        VerticalLayout {
+            alignment: end;
+            Button {
+                enabled: log_component_enabled;
+                height: 30px;
+                text: "Создать аккаунт";
+                clicked => {
+                    reg_component_enabled = true;
+                    visible_reg_in = true;
+                    visible_log_in = false;
+                    log_component_enabled = false;
+                }
+            }
+        }
+    }
+    Window {
+
+        visible: visible_reg_in;
+        width: 300px;
+        height: 500px;
+        VerticalLayout {
+            alignment: center;
+            Text {
+                font-size: 20pt;
+                horizontal-alignment: center;
+                text: "Регистрация";
+            }
+            VerticalBox {
+                alignment: center;
+                height: 230px;
+                LineEdit {
+                    enabled: reg_component_enabled;
+                    placeholder-text: "Имя";
+
+                }
+                LineEdit {
+                    enabled: reg_component_enabled;
+                    placeholder-text: "Фамилия";
+                }
+                LineEdit {
+                    enabled: reg_component_enabled;
+                    placeholder-text: "Почта";
+                }
+                LineEdit {
+                    enabled: reg_component_enabled;
+                    placeholder-text: "Пароль";
+                }
+                LineEdit {
+                    enabled: reg_component_enabled;
+                    placeholder-text: "Повторите пароль";
+                }
+                Button {
+                    enabled: reg_component_enabled;
+                    text: "Войти";
+                }
+            }
+        }
+        VerticalLayout {
+            alignment: end;
+            Button {
+                enabled: reg_component_enabled;
+                height: 30px;
+                text: "Уже есть аккаунт";
+                clicked => {
+                    log_component_enabled = true;
+                    visible_log_in = true;
+                    reg_component_enabled = false;
+                    visible_reg_in = false;
+                }
+            }
+        }
+    }
 }
