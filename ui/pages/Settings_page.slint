@@ -1,0 +1,12 @@
+import { Switch, Palette } from "std-widgets.slint";
+
+export component SettingsPage inherits Window {
+    Switch {
+           horizontal-stretch: 0;
+           text: @tr("Dark Mode");
+           checked: Palette.color-scheme == ColorScheme.dark;
+           toggled => {
+                Palette.color-scheme = self.checked ? ColorScheme.dark : ColorScheme.light;
+           }
+    }
+}

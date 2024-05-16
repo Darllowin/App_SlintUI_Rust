@@ -1,21 +1,20 @@
-import { Button, VerticalBox } from "std-widgets.slint";
+import { Button, VerticalBox, Palette, Switch } from "std-widgets.slint";
+import { PCPage, GamesPage, AccountPage, SessionsPage, SettingsPage } from "ui/pages/pages.slint";
 import { SideBar } from "ui/side_bar.slint";
 
 export component AppWindow inherits Window {
-     preferred-width: 700px;
-     preferred-height: 500px;
+     width: 900px;
+     height: 600px;
      HorizontalLayout {
             side-bar := SideBar {
-                title: @tr("Slint Widgets Gallery");
-                model: [@tr("Menu" => "Controls"), @tr("Menu" => "ListView"), @tr("Menu" => "TableView"), @tr("Menu" => "TextEdit"), @tr("Menu" => "Easings"), @tr("Menu" => "About")];
+                title: @tr("Computer Club");
+                model: [@tr("Menu" => "PC"), @tr("Menu" => "Games"), @tr("Menu" => "Account"), @tr("Menu" => "Sessions"), @tr("Menu" => "Settings")];
             }
-            /*
-            if(side-bar.current-item == 0) : ControlsPage {}
-            if(side-bar.current-item == 1) : ListViewPage {}
-            if(side-bar.current-item == 2) : TableViewPage {}
-            if(side-bar.current-item == 3) : TextEditPage {}
-            if(side-bar.current-item == 4) : EasingsPage {}
-            if(side-bar.current-item == 5) : AboutPage {}
-            */
-        }
+
+            if(side-bar.current-item == 0) : PCPage {}
+            if(side-bar.current-item == 1) : GamesPage {}
+            if(side-bar.current-item == 2) : AccountPage {}
+            if(side-bar.current-item == 3) : SessionsPage {}
+            if(side-bar.current-item == 4) : SettingsPage {}
+     }
 }
