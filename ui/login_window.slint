@@ -1,17 +1,22 @@
 import { LineEdit, Button, VerticalBox } from "std-widgets.slint";
 
-export component AccountPage inherits Window {
+export component LoginWindow inherits Window {
     property <bool> log_component_enabled: true;
     property <bool> reg_component_enabled: false;
     property <bool> visible_log_in: true;
     property <bool> visible_reg_in: false;
     in-out property<bool> log_in: false;
-    callback try_login();
+    in-out property<string> name;
+    in-out property<string> surname;
+    in-out property<string> email;
+    in-out property<string> password;
+    in-out property<string> seccond_password;
+    callback login_requested(string, string);
+    callback registration_requested(string, string, string, string, string);
+    width: 300px;
+    height: 500px;
     Window {
         visible: visible_log_in;
-        property<string> username;
-        property<string> password;
-        callback login_requested(string, string);
         width: 300px;
         height: 500px;
         VerticalLayout {
@@ -25,11 +30,13 @@ export component AccountPage inherits Window {
                 alignment: center;
                 height: 230px;
                 LineEdit {
+                    edited (email) => {root.email = email}
                     enabled: log_component_enabled;
                     placeholder-text: "Почта";
 
                 }
                 LineEdit {
+                    edited(password) => {root.password = password}
                     enabled: log_component_enabled;
                     placeholder-text: "Пароль";
 
@@ -37,7 +44,7 @@ export component AccountPage inherits Window {
                 Button {
                     enabled: log_component_enabled;
                     text: "Войти";
-                    clicked => { login_requested(username, password); }
+                    clicked => { root.login_requested(email, password); }
 
                 }
             }
@@ -72,27 +79,32 @@ export component AccountPage inherits Window {
                 alignment: center;
                 height: 230px;
                 LineEdit {
+                    edited(name) => {root.name = name}
                     enabled: reg_component_enabled;
                     placeholder-text: "Имя";
-
                 }
                 LineEdit {
+                    edited(surname) => {root.surname = surname}
                     enabled: reg_component_enabled;
                     placeholder-text: "Фамилия";
                 }
                 LineEdit {
+                    edited(email) => {root.email = email}
                     enabled: reg_component_enabled;
                     placeholder-text: "Почта";
                 }
                 LineEdit {
+                    edited(password) => {root.password = password}
                     enabled: reg_component_enabled;
                     placeholder-text: "Пароль";
                 }
                 LineEdit {
+                    edited(seccond_password) => {root.seccond_password = seccond-password}
                     enabled: reg_component_enabled;
                     placeholder-text: "Повторите пароль";
                 }
                 Button {
+                    clicked => { registration_requested(name, surname, email, password, seccond_password); }
                     enabled: reg_component_enabled;
                     text: "Войти";
                 }
