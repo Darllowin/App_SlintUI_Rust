@@ -1,7 +1,9 @@
 import { PCPage, GamesPage, AccountPage, SessionsPage, SettingsPage } from "ui/pages/pages.slint";
 import { SideBar } from "ui/side_bar.slint";
+import { LineEdit, Button, VerticalBox, SpinBox } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
+    callback try_open();
      width: 900px;
      height: 600px;
      HorizontalLayout {
@@ -9,7 +11,6 @@ export component AppWindow inherits Window {
                 title: @tr("Computer Club");
                 model: [@tr("Menu" => "PC"), @tr("Menu" => "Games"), @tr("Menu" => "Account"), @tr("Menu" => "Sessions"), @tr("Menu" => "Settings")];
             }
-
             HorizontalLayout {
                 alignment: center;
                 if(side-bar.current-item == 0) : PCPage {}
@@ -17,6 +18,7 @@ export component AppWindow inherits Window {
                 if(side-bar.current-item == 2) : AccountPage {}
                 if(side-bar.current-item == 3) : SessionsPage {}
                 if(side-bar.current-item == 4) : SettingsPage {}
+
             }
 
      }
